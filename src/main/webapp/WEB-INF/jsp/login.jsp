@@ -81,17 +81,17 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<form:form id="myForm" method="post"
-							class="bs-example form-horizontal" commandName="studentLogin">
+							class="bs-example form-horizontal" commandName="userLogin">
 							<fieldset>
 								<legend>Student Enrollment Login Form</legend>
 
 								<div class="form-group">
-									<label for="userNameInput" class="col-lg-3 control-label">User
+									<label for="usernameInput" class="col-lg-3 control-label">User
 										Name</label>
 									<div class="col-lg-9">
-										<form:input type="text" class="form-control" path="userName"
-											id="userNameInput" placeholder="User Name" />
-										<form:errors path="userName" cssClass="error" />
+										<form:input type="text" class="form-control" path="username"
+											id="usernameInput" placeholder="User Name" />
+										<form:errors path="username" cssClass="error" />
 									</div>
 								</div>
 
