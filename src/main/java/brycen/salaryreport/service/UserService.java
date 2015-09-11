@@ -1,5 +1,4 @@
 package brycen.salaryreport.service;
-
 import brycen.salaryreport.model.User;
 
 public interface UserService {

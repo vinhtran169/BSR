@@ -3,12 +3,8 @@ package brycen.salaryreport.model;
 public class UserLogin {
 	private String username;
 	private String password;
-	
-	
 	public UserLogin() {
-		
 	}
-	
 	public String getUsername() {
 		return username;
 	}
@@ -20,7 +16,5 @@ public class UserLogin {
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	
-	
+	}	
 }
