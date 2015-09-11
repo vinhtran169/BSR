@@ -5,10 +5,8 @@ public class User {
 	private String username;
 	private String password;
 	private String email;
-	
 	public User() {
-	}
-	
+	}	
 	public Long getId() {
 		return id;
 	}
@@ -32,9 +30,5 @@ public class User {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	
-	
-	
-	
+	}		
 }
