@@ -1,11 +1,12 @@
 package brycen.salaryreport.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import brycen.salaryreport.mappers.UserMapper;
 import brycen.salaryreport.model.User;
-
+@Service("userLogin")
 public class UserServiceImp implements UserService {
 
 	@Autowired
@@ -28,6 +29,11 @@ public class UserServiceImp implements UserService {
 		} else
 			return false;
 
+	}
+
+	public void insertUser(User user) {
+		userMapper.insertUser(user);
+		
 	}
 
 }
