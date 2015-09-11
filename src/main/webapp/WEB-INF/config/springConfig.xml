@@ -24,9 +24,9 @@
 
 <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 	<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	<property name="url" value="jdbc:mysql://localhost:3306/bookstore?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" />
+	<property name="url" value="jdbc:mysql://localhost:3306/brycensr?autoReconnect=true&amp;createDatabaseIfNotExist=true&amp;" />
 	<property name="username" value="root" />
-	<property name="password" value="khongco@12" />
+	<property name="password" value="1234" />
 </bean>
 
 <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">

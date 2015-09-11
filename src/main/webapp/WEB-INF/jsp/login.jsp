@@ -81,7 +81,7 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<form:form id="myForm" method="post"
-							class="bs-example form-horizontal" commandName="studentLogin">
+							class="bs-example form-horizontal" commandName="userLogin">
 							<fieldset>
 								<legend>Student Enrollment Login Form</legend>
 
