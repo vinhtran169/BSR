@@ -25,7 +25,7 @@ public class UserServiceImp implements UserService {
 			return false;
 		}
 	}
-	public void insertUser(User user) {
+	public void insertUser(User user) {		
 		userMapper.insertUser(user);
 	}
 }
