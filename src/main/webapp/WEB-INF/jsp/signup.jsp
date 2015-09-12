@@ -133,7 +133,7 @@
 										Address</label>
 									<div class="col-lg-9">
 										<form:input type="text" class="form-control"
-											path="email" id="emailInput" placeholder="Email" />
+											path="email" id="emailInput" placeholder="Email Address" />
 										<form:errors path="email" cssClass="error" />
 									</div>
 								</div>
@@ -142,7 +142,7 @@
 									<button class="btn btn-default">Cancel</button>
 
 									<button class="btn btn-primary" data-toggle="modal"
-										data-target="#themodal">Submit</button>
+										data-target="#themodal" action="Click" >Submit</button>
 									<div id="themodal" class="modal fade" data-backdrop="static">
 										<div class="modal-dialog">
 											<div class="modal-content">
