@@ -2,12 +2,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="brycen.*, java.util.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Login Success</title>
+<title>User List</title>
 <link href="assets/css/bootstrap-united.css" rel="stylesheet" />
 
 </head>
@@ -54,12 +55,11 @@
 	<legend>Student Enrollment Login Success</legend>
 	 -->
 	<div class="panel panel-success">
-		<div class="panel-heading">
-
-			<c:if test="${not empty message}">
+		<c:if test="${not empty message}">
+			<div class="panel-heading">
 				<h3 class="panel-title">${message}</h3>
-			</c:if>
-		</div>
+			</div>
+		</c:if>
 		<div class="panel-body">
 			<table class="table table-hover">
 				<thead>
@@ -72,20 +72,14 @@
 					</tr>
 				</thead>
 				<tbody>
-
-					<%
-						List<User> userList = (List) request.getAttribute("userList");
-						for (User u : userList) {
-							out.println("<tr>");
-							out.println("<td>" + u.getId() + "</td>");
-							out.println("<td>" + u.getUsername() + "</td>");
-							out.println("<td>" + u.getEmail() + "</td>");
-							out.println("<td></td>");
-							out.println("</tr>");
-						}
-					%>
-
-
+					<c:forEach var="u" items="${userList}" varStatus="status">
+						<tr>
+							<td>${u.id}</td>
+							<td>${u.username}</td>
+							<td>${u.email}</td>
+							<td></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
