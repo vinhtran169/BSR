@@ -74,7 +74,11 @@
 
 		<div></div>
 	</div>
-
+	
+	<c:if test="${not empty message}">
+		<div class="message green">${message}</div>
+	</c:if>
+	
 	<div class="col-lg-6 col-lg-offset-3">
 		<div class="well">
 			<div class="container">
