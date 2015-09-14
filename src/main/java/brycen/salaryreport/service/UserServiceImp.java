@@ -1,7 +1,10 @@
 package brycen.salaryreport.service;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import brycen.salaryreport.mappers.UserMapper;
 import brycen.salaryreport.model.User;
 
@@ -27,5 +30,10 @@ public class UserServiceImp implements UserService {
 	}
 	public void insertUser(User user) {		
 		userMapper.insertUser(user);
+	}
+	public List<User> getAllUser() {
+		List<User> lst = new ArrayList<User>();
+		lst = userMapper.getAllUser();
+		return lst;
 	}
 }

@@ -1,4 +1,5 @@
 package brycen.salaryreport.controller;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -38,7 +39,7 @@ public class UserController {
 			model.addAttribute("message", "Fill in all fields");
 			return "login";
 		}
-		
+
 	}
 	@RequestMapping(value = "/signup", method = RequestMethod.GET)
 	public String signup(Model model) {
@@ -63,4 +64,11 @@ public class UserController {
 			}
 		}
 	}
+	@RequestMapping(value ="/user", method=  RequestMethod.GET)
+	public String user(Model model){
+		List<User> userlist = userService.getAllUser();
+		model.addAttribute("userList", userlist);
+		return "user";
+	}
+
 }
