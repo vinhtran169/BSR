@@ -1,8 +1,13 @@
 package brycen.salaryreport.controller;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,7 +23,12 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
-	
+	@RequestMapping(value ="/list", method=  RequestMethod.GET)
+	public String userlist(Model model){
+		List<User> UserList = userService.getUserList();
+		model.addAttribute("userList", UserList);
+		return "UserList";
+		}
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
 	public String signup(Model model) {
 		User user= new User();
@@ -43,7 +53,6 @@ public class UserController {
 			
 		}
 	}
-	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login(Model model) {
 		UserLogin userLogin = new UserLogin();
@@ -55,10 +64,12 @@ public class UserController {
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(@ModelAttribute("userLogin") UserLogin userLogin) {
 		boolean found = userService.getUserByLogin(userLogin.getUserName(), userLogin.getPassword());
+		
 		if (found) {				
 			return "success";
 		} else {				
 			return "failure";
 		}
 	}
+
 }

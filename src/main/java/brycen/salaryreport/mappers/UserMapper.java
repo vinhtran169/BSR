@@ -1,6 +1,8 @@
 package brycen.salaryreport.mappers;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -16,4 +18,7 @@ public interface UserMapper {
 			+ " EMAIL as email "
 			+ "FROM user WHERE userName = #{userName}")
 	public User getUserByUserName(String userName);
+	int updateByPrimaryKey(User record);
+	@Select("SELECT * FROM user")
+	public List<User> getUserList();
 }

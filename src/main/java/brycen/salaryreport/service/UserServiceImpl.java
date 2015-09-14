@@ -1,6 +1,11 @@
 package brycen.salaryreport.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,6 +41,14 @@ public class UserServiceImpl implements UserService {
 		
 		return false;
 	}
+
+	public List<User> getUserList() {
+		List<User> ListUser = new ArrayList<User>();
+		ListUser = userMapper.getUserList();
+		return ListUser;
+	}
+
+	
 
 
 }

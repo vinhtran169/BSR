@@ -1,13 +1,16 @@
 package brycen.salaryreport.model;
 
 import java.util.Date;
+
+import org.hibernate.validator.constraints.*;
 public class User {
 	
-	private Long id;	
+	private Long id;
+	@NotEmpty 
 	private String userName;
-
+	@NotEmpty
 	private String password;
-	
+	@NotEmpty @Email
 	private String email;
 	
 

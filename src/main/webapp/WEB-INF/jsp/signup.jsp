@@ -104,7 +104,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-6">
-						<form:form id="myForm" method="post"
+						<form:form id="myForm"  method="post" 
 							class="bs-example form-horizontal" commandName="user">
 							<fieldset>
 								<legend>Student Enrollment Signup Form</legend>
