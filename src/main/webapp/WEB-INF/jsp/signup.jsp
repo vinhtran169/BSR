@@ -94,11 +94,9 @@
 
 		<div></div>
 	</div>
-
 	<c:if test="${not empty message}">
 		<div class="message green">${message}</div>
 	</c:if>
-
 	<div class="col-lg-6 col-lg-offset-3">
 		<div class="well">
 			<div class="container">
@@ -126,9 +124,7 @@
 											path="password" id="passwordInput" placeholder="Password" />
 										<form:errors path="password" cssClass="error" />
 									</div>
-								</div>
-
-								
+								</div>								
 								<div class="form-group">
 									<label for="emailInput" class="col-lg-3 control-label">Email
 										Address</label>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -82,7 +83,7 @@
 	<div class="col-lg-6 col-lg-offset-3">
 		<div class="well">
 			<div class="container">
-				<div class="row">
+				<div>
 					<div class="col-lg-6">
 						<form:form id="myForm" method="post"
 							class="bs-example form-horizontal" commandName="userLogin">

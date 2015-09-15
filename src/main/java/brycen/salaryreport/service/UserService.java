@@ -7,4 +7,7 @@ public interface UserService {
 	boolean getUserByUserName(String username);
 	boolean getUserByLogin(String username, String password);
 	List<User> getAllUser();
+	User getUserByID(Long id);
+	void updateUser(User user);
+	void deleteUser(User user);
 }

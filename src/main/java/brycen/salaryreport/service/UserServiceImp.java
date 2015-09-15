@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader.Array;
 import brycen.salaryreport.mappers.UserMapper;
 import brycen.salaryreport.model.User;
 
@@ -35,5 +33,19 @@ public class UserServiceImp implements UserService {
 		List<User> lst = new ArrayList<User>();
 		lst = userMapper.getAllUser();
 		return lst;
+	}
+	public User getUserByID(Long id) {
+		User user = userMapper.getUserByID(id);
+		if (user != null) {
+			return user;
+		} else{
+			return null;
+		}
+	}
+	public void updateUser(User user) {
+		userMapper.updateUser(user);		
+	}
+	public void deleteUser(User user) {
+		userMapper.deleteUser(user);	
 	}
 }
