@@ -9,4 +9,7 @@ public interface UserService {
 	boolean getUserByLogin(String userName, String password);
 	boolean getUserByUserName(String userName);
 	List<User> getUserList();
+	void updateByPrimaryKey(User user);
+	void DeleteByPrimaryKey(Long id);
+	
 }

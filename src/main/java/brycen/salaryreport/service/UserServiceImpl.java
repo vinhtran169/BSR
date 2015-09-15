@@ -48,6 +48,16 @@ public class UserServiceImpl implements UserService {
 		return ListUser;
 	}
 
+	public void updateByPrimaryKey(User user) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void DeleteByPrimaryKey(Long id) {
+		// TODO Auto-generated method stub
+		userMapper.DeleteByPrimaryKey(id);
+	}
+
 	
 
 

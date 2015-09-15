@@ -3,6 +3,7 @@ package brycen.salaryreport.mappers;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Select;
@@ -21,4 +22,6 @@ public interface UserMapper {
 	int updateByPrimaryKey(User record);
 	@Select("SELECT * FROM user")
 	public List<User> getUserList();
+	@Delete("DELETE FROM user WHERE id=#{id} " )
+	public void DeleteByPrimaryKey(Long id);
 }
