@@ -63,6 +63,7 @@
 			<form:form id="myForm" method="POST"
 				class="bs-example form-horizontal" commandName="editUser">
 				<button class="btn btn-primary" name="action" value="edit" id="edit"">Edit</button>
+				<button class="btn btn-primary" name="action" value="delete" id="delete">Delete</button>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -80,8 +81,6 @@
 								<td>${u.id}</td>
 								<td>${u.username}</td>
 								<td>${u.email}</td>
-								<td><a href="user/${u.id}/delete" onclick="return confirm('Are you sure?')"><img
-										src="images/delete.png" /></a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -101,6 +100,15 @@
 		$("#edit").click(function() {
 			selected_value = $('input:checked').length
 			if(selected_value != 1){
+				alert("Please select only 1 checkbox")
+				return false;
+			}
+		});
+		$("#delete").click(function() {
+			selected_value = $('input:checked').length
+			if(selected_value == 1){
+				return confirm('Are you sure?');
+			}else{
 				alert("Please select only 1 checkbox")
 				return false;
 			}

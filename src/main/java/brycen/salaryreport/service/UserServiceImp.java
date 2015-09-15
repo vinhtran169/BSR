@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import brycen.salaryreport.mappers.UserMapper;
 import brycen.salaryreport.model.User;
 
@@ -10,11 +11,12 @@ import brycen.salaryreport.model.User;
 public class UserServiceImp implements UserService {
 	@Autowired
 	private UserMapper userMapper;
+	@Transactional
 	public boolean getUserByUserName(String username) {
 		User user = userMapper.getUserByUserName(username);
 		if (user != null) {
 			return true;
-		} else{
+		} else {
 			return false;
 		}
 	}
@@ -22,11 +24,11 @@ public class UserServiceImp implements UserService {
 		User user = userMapper.getUserByUserName(username);
 		if (user != null && user.getPassword().equals(password)) {
 			return true;
-		} else{
+		} else {
 			return false;
 		}
 	}
-	public void insertUser(User user) {		
+	public void insertUser(User user) {
 		userMapper.insertUser(user);
 	}
 	public List<User> getAllUser() {
@@ -38,14 +40,14 @@ public class UserServiceImp implements UserService {
 		User user = userMapper.getUserByID(id);
 		if (user != null) {
 			return user;
-		} else{
+		} else {
 			return null;
 		}
 	}
 	public void updateUser(User user) {
-		userMapper.updateUser(user);		
+		userMapper.updateUser(user);
 	}
 	public void deleteUser(User user) {
-		userMapper.deleteUser(user);	
+		userMapper.deleteUser(user);
 	}
 }
