@@ -26,7 +26,6 @@ import brycen.salaryreport.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		UserLogin userLogin = new UserLogin();
@@ -85,8 +84,7 @@ public class UserController {
 		String action = request.getParameter("action");
 		if (id.length == 1 && id != null) {
 			if (action.equals("edit")) {
-				model.addAttribute("message", "Enter new infomation");
-				return "redirect:/user/" + id[0] + "/edit";				
+				return "redirect:/user/" + id[0] + "/edit";
 			} else {
 				return "redirect:/user/" + id[0] + "/delete";
 			}
@@ -94,12 +92,6 @@ public class UserController {
 			model.addAttribute("message", "Select only a checkbox");
 			return "user";
 		}
-	}
-	@RequestMapping(value = "/user/{id}")
-	public String profileUser(@PathVariable("id") Long id, Model model) {
-		User user = (User) userService.getUserByID(id);
-		model.addAttribute("user", user);
-		return "profile";
 	}
 	@RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
 	public String editProfile(@ModelAttribute("user") User user, Model model) {
@@ -110,13 +102,14 @@ public class UserController {
 			return "redirect:/user";
 		} else {
 			model.addAttribute("message", "Fill all field");
-			return "redirect:/user";
+			return "editProfile";
 		}
 	}
 	@RequestMapping(value = "/user/{id}/edit")
 	public String editProfile(@PathVariable("id") Long id, Model model) {
 		User user = (User) userService.getUserByID(id);
 		model.addAttribute("user", user);
+		model.addAttribute("message", "Enter new info");
 		return "editProfile";
 	}
 	@RequestMapping(value = "/user/{id}/delete")
