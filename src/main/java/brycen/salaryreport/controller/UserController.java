@@ -1,6 +1,9 @@
 package brycen.salaryreport.controller;
+
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -16,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import brycen.salaryreport.model.User;
 import brycen.salaryreport.model.UserLogin;
 import brycen.salaryreport.service.UserService;
@@ -25,7 +30,6 @@ import brycen.salaryreport.service.UserService;
 public class UserController {
 	@Autowired
 	private UserService userService;
-
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(Model model) {
 		UserLogin userLogin = new UserLogin();
@@ -55,7 +59,7 @@ public class UserController {
 		return "signup";
 	}
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@ModelAttribute("user") User user, Model model) {
+	public String signup(@ModelAttribute("user") User user, Model model, RedirectAttributes modelRedirect) {
 		boolean isExist = userService.getUserByUserName(user.getUsername());
 		if (isExist) {
 			model.addAttribute("message", "Username is exist.");
@@ -67,7 +71,7 @@ public class UserController {
 				return "signup";
 			} else {
 				userService.insertUser(user);
-				model.addAttribute("message", "Saved!");
+				modelRedirect.addFlashAttribute("message", "Saved!");
 				return "redirect:login.html";
 			}
 		}
@@ -78,44 +82,45 @@ public class UserController {
 		model.addAttribute("userList", userlist);
 		return "user";
 	}
-	
 	@RequestMapping(value = "/user", method = RequestMethod.POST)
-	public String user(@RequestParam(value = "sltEdit") Long[] id, Model model) {
-		if(id.length ==1 && id !=null){
-			return "redirect:/user/"+id[0]+"/edit";
-		}else{
+	public String user(@RequestParam(value = "sltEdit") Long[] id, Model model,
+			HttpServletRequest request) {
+		String action = request.getParameter("action");
+		if (id.length == 1 && id != null) {
+			if (action.equals("edit")) {
+				return "redirect:/user/" + id[0] + "/edit";
+			} else {
+				return "redirect:/user/" + id[0] + "/delete";
+			}
+		} else {
 			model.addAttribute("message", "Select only a checkbox");
 			return "user";
-		}	
-	}	
-	@RequestMapping(value="/user/{id}")
-	public String profileUser(@PathVariable("id") Long id, Model model){
-		User user = (User) userService.getUserByID(id);
-		model.addAttribute("user", user);
-		return "profile";
-	}
-	@RequestMapping(value="/user/{id}", method =RequestMethod.POST)
-	public String editProfile(@ModelAttribute("user") User user,Model model){
-		if(!user.getUsername().isEmpty() && !user.getPassword().isEmpty() && !user.getEmail().isEmpty()){
-			userService.updateUser(user);
-			model.addAttribute("message","Update sucessful");
-			return "redirect:/user";			
-		}else{
-			model.addAttribute("message", "Fill all field");
-			return "redirect:/user";
 		}
 	}
-	@RequestMapping(value="/user/{id}/edit")
-	public String editProfile(@PathVariable("id") Long id, Model model){
+	@RequestMapping(value = "/user/{id}", method = RequestMethod.POST)
+	public String editProfile(@ModelAttribute("user") User user, Model model) {
+		if (!user.getUsername().isEmpty() && !user.getPassword().isEmpty()
+				&& !user.getEmail().isEmpty()) {
+			userService.updateUser(user);
+			model.addAttribute("message", "Update sucessful");
+			return "redirect:/user";
+		} else {
+			model.addAttribute("message", "Fill all field");
+			return "editProfile";
+		}
+	}
+	@RequestMapping(value = "/user/{id}/edit")
+	public String editProfile(@PathVariable("id") Long id, Model model) {
 		User user = (User) userService.getUserByID(id);
 		model.addAttribute("user", user);
+		model.addAttribute("message", "Enter new info");
 		return "editProfile";
 	}
-	@RequestMapping(value="/user/{id}/delete")
-	public String delete(@PathVariable("id") Long id, Model model){
+	@RequestMapping(value = "/user/{id}/delete")
+	public String delete(@PathVariable("id") Long id, RedirectAttributes modelRedirect) {
 		User user = (User) userService.getUserByID(id);
 		userService.deleteUser(user);
-		model.addAttribute("message", "Deleted");
+		modelRedirect.addFlashAttribute("message", "Deleted " + user.getUsername());
 		return "redirect:/user";
 	}
 }
