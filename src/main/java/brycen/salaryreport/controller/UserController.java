@@ -1,7 +1,9 @@
 package brycen.salaryreport.controller;
 
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import brycen.salaryreport.model.User;
 import brycen.salaryreport.model.UserLogin;
 import brycen.salaryreport.service.UserService;
@@ -55,7 +59,7 @@ public class UserController {
 		return "signup";
 	}
 	@RequestMapping(value = "/signup", method = RequestMethod.POST)
-	public String signup(@ModelAttribute("user") User user, Model model) {
+	public String signup(@ModelAttribute("user") User user, Model model, RedirectAttributes modelRedirect) {
 		boolean isExist = userService.getUserByUserName(user.getUsername());
 		if (isExist) {
 			model.addAttribute("message", "Username is exist.");
@@ -67,7 +71,7 @@ public class UserController {
 				return "signup";
 			} else {
 				userService.insertUser(user);
-				model.addAttribute("message", "Saved!");
+				modelRedirect.addFlashAttribute("message", "Saved!");
 				return "redirect:login.html";
 			}
 		}
@@ -113,10 +117,10 @@ public class UserController {
 		return "editProfile";
 	}
 	@RequestMapping(value = "/user/{id}/delete")
-	public String delete(@PathVariable("id") Long id, Model model) {
+	public String delete(@PathVariable("id") Long id, RedirectAttributes modelRedirect) {
 		User user = (User) userService.getUserByID(id);
 		userService.deleteUser(user);
-		model.addAttribute("message", "Deleted");
+		modelRedirect.addFlashAttribute("message", "Deleted " + user.getUsername());
 		return "redirect:/user";
 	}
 }
